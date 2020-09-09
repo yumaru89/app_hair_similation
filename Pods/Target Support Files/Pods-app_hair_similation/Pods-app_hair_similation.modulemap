@@ -1,0 +1,6 @@
+framework module Pods_app_hair_similation {
+  umbrella header "Pods-app_hair_similation-umbrella.h"
+
+  export *
+  module * { export * }
+}
