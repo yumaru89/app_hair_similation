@@ -256,9 +256,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" image="close"/>
-                                <connections>
-                                    <action selector="closeBt:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="KmU-nU-AFv"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="hw5-uY-nnh">
@@ -268,6 +265,9 @@
                                 <state key="normal" image="download">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="similateDwonload:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="bvi-mq-eB9"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>

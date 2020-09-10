@@ -23,6 +23,7 @@ class SimilationVC: UIViewController {
         super.viewDidLoad()
         
         setHairRanking(taglist: [1,2,3])
+        setResultLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,8 +49,25 @@ class SimilationVC: UIViewController {
         }
     }
     
-    @IBAction func closeBt(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+    @IBAction func similateDwonload(_ sender: Any) {
+        let downloadedBar: UILabel = UILabel()
+        downloadedBar.frame = CGRect(x: 0, y: userImageview.frame.height-32, width: userImageview.frame.width, height: 32)
+        downloadedBar.tag = 4
+        downloadedBar.backgroundColor = UIColor(hex: "434343")
+        downloadedBar.text = "  端末に画像を保存しました"
+        downloadedBar.textColor = UIColor.white
+        downloadedBar.font = downloadedBar.font.withSize(13)
+        userImageview.addSubview(downloadedBar)
+        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SimilationVC.removeDownloadedBar), userInfo: nil, repeats: false)
+    }
+    
+    @objc func removeDownloadedBar() {
+        let subviews = userImageview.subviews
+        for subview in subviews {
+            if subview.tag == 4 {
+                subview.removeFromSuperview()
+            }
+        }
     }
 
     func setHiar(modelName: String, modelLm: [Int]) {
