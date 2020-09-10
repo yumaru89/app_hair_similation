@@ -21,6 +21,8 @@ class SimilationVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setHairRanking(taglist: [1,2,3])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +59,33 @@ class SimilationVC: UIViewController {
         userImageview.addSubview(hairImgview)
     }
     
+    func setHairRanking(taglist: [Int]) {
+        for tag in taglist {
+            let button = self.view.viewWithTag(tag) as? UIButton
+            print(tag)
+            let rankingIcon: UILabel = UILabel()
+            rankingIcon.frame = CGRect(x: 8, y: 8, width: 16, height: 16)
+            rankingIcon.layer.cornerRadius = 8
+            rankingIcon.clipsToBounds = true
+            rankingIcon.text = String(tag)
+            rankingIcon.font = rankingIcon.font.withSize(12)
+            rankingIcon.textAlignment = NSTextAlignment.center
+            var rankingBgColor: String = ""
+            switch tag {
+            case 1:
+                rankingBgColor = "DCC48E"
+            case 2:
+                rankingBgColor = "AAAEAC"
+            case 3:
+                rankingBgColor = "CBA37E"
+            default:
+                rankingBgColor = "000000"
+            }
+            rankingIcon.backgroundColor = UIColor(hex: rankingBgColor)
+            button?.addSubview(rankingIcon)
+        }
+    }
+    
     func removeSubviews(parentView: UIImageView){
         let subviews = parentView.subviews
         for subview in subviews {
@@ -69,5 +98,15 @@ class SimilationVC: UIViewController {
             let button = self.view.viewWithTag(tag) as? UIButton
             button?.layer.borderWidth = 0.0
         }
+    }
+}
+
+extension UIColor {
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        let v = Int("000000" + hex, radix: 16) ?? 0
+        let r = CGFloat(v / Int(powf(256, 2)) % 256) / 255
+        let g = CGFloat(v / Int(powf(256, 1)) % 256) / 255
+        let b = CGFloat(v / Int(powf(256, 0)) % 256) / 255
+        self.init(red: r, green: g, blue: b, alpha: min(max(alpha, 0), 1))
     }
 }
