@@ -81,7 +81,6 @@ class SimilationVC: UIViewController {
     func setHairRanking(taglist: [Int]) {
         for tag in taglist {
             let button = self.view.viewWithTag(tag) as? UIButton
-            print(tag)
             let rankingIcon: UILabel = UILabel()
             rankingIcon.frame = CGRect(x: 8, y: 8, width: 16, height: 16)
             rankingIcon.layer.cornerRadius = 8
