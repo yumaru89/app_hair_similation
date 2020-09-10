@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "hair1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "49be676e-32cc-11ea-9997-dca904866664_000.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

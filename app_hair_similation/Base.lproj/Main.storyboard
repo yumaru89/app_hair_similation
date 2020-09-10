@@ -146,9 +146,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTZ-AD-WbE">
                                                 <rect key="frame" x="315.33333333333331" y="0.0" width="157.33333333333331" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPF-lH-gQo">
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPF-lH-gQo">
                                                         <rect key="frame" x="6" y="0.0" width="151.33333333333334" height="190"/>
                                                         <state key="normal" title="Button" image="model3/face"/>
+                                                        <connections>
+                                                            <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="mM6-6j-qhk"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -161,9 +164,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGO-Y5-EDy">
                                                 <rect key="frame" x="157.66666666666669" y="0.0" width="157.66666666666669" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-Qo-VlE">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-Qo-VlE">
                                                         <rect key="frame" x="6" y="0.0" width="145.66666666666666" height="190"/>
                                                         <state key="normal" backgroundImage="model2/face"/>
+                                                        <connections>
+                                                            <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="5w4-vx-ks4"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -176,9 +182,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8S-8h-mXJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2d3-XG-Rh3">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2d3-XG-Rh3">
                                                         <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="190"/>
                                                         <state key="normal" backgroundImage="model1/face"/>
+                                                        <connections>
+                                                            <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="3Ae-AU-7J0"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -263,6 +272,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="userImageview" destination="EKm-3y-A4d" id="Edt-om-TZg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20v-4a-7Xg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -273,7 +285,7 @@
         <image name="ca_userface" width="414" height="896"/>
         <image name="close" width="24" height="24"/>
         <image name="download" width="19" height="23"/>
-        <image name="model1/face" width="240" height="300"/>
+        <image name="model1/face" width="480" height="600"/>
         <image name="model2/face" width="480" height="600"/>
         <image name="model3/face" width="480" height="600"/>
         <image name="re_userface" width="207" height="279"/>
