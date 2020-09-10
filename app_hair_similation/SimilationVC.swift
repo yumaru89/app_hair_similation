@@ -31,6 +31,7 @@ class SimilationVC: UIViewController {
     }
     
     @IBAction func setHairButton(_ sender: UIButton) {
+        setSimilationLayout()
         removeSubviews(parentView: userImageview)
         removeButtonBorder(taglist: [1,2,3])
         sender.layer.borderColor = UIColor.black.cgColor
@@ -50,7 +51,7 @@ class SimilationVC: UIViewController {
     @IBAction func closeBt(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
+
     func setHiar(modelName: String, modelLm: [Int]) {
         let imgRatio: CGFloat = CGFloat(userfaceHairW) / 200
         let modelImage: UIImage = UIImage(named: "\(modelName)/hair")!
@@ -85,6 +86,37 @@ class SimilationVC: UIViewController {
             button?.addSubview(rankingIcon)
         }
     }
+    
+    func setResultLayout() {
+        self.navigationItem.title = "判定結果"
+        let button = UIButton()
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.addTarget(self, action: #selector(SimilationVC.backTopView), for:  UIControl.Event.touchUpInside)
+        let backBarButtonItem = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+    
+    
+    @objc func backTopView() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+
+    func setSimilationLayout() {
+        self.navigationItem.title = "シミュレーション"
+        let button = UIButton()
+        button.setImage(UIImage(named: "back"), for: .normal)
+        button.addTarget(self, action: #selector(SimilationVC.backResultView), for:  UIControl.Event.touchUpInside)
+        let backBarButtonItem = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+    
+    
+    @objc func backResultView() {
+        removeSubviews(parentView: userImageview)
+        removeButtonBorder(taglist: [1,2,3])
+        setResultLayout()
+    }
+    
     
     func removeSubviews(parentView: UIImageView){
         let subviews = parentView.subviews
