@@ -144,10 +144,10 @@
                                         <rect key="frame" x="10" y="48" width="394" height="190"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTZ-AD-WbE">
-                                                <rect key="frame" x="315.33333333333331" y="0.0" width="157.33333333333331" height="190"/>
+                                                <rect key="frame" x="339.33333333333331" y="0.0" width="157.33333333333331" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPF-lH-gQo">
-                                                        <rect key="frame" x="6" y="0.0" width="151.33333333333334" height="190"/>
+                                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPF-lH-gQo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="157.33333333333334" height="190"/>
                                                         <state key="normal" title="Button" image="model3/face"/>
                                                         <connections>
                                                             <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="mM6-6j-qhk"/>
@@ -158,14 +158,14 @@
                                                     <constraint firstItem="uPF-lH-gQo" firstAttribute="top" secondItem="CTZ-AD-WbE" secondAttribute="top" id="46D-Fp-dED"/>
                                                     <constraint firstAttribute="bottom" secondItem="uPF-lH-gQo" secondAttribute="bottom" id="AsO-Mh-LdZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="uPF-lH-gQo" secondAttribute="trailing" id="Kgb-GS-nBH"/>
-                                                    <constraint firstItem="uPF-lH-gQo" firstAttribute="leading" secondItem="CTZ-AD-WbE" secondAttribute="leading" constant="6" id="bPR-NA-bsy"/>
+                                                    <constraint firstItem="uPF-lH-gQo" firstAttribute="leading" secondItem="CTZ-AD-WbE" secondAttribute="leading" id="bPR-NA-bsy"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGO-Y5-EDy">
-                                                <rect key="frame" x="157.66666666666669" y="0.0" width="157.66666666666669" height="190"/>
+                                                <rect key="frame" x="169.66666666666669" y="0.0" width="157.66666666666669" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-Qo-VlE">
-                                                        <rect key="frame" x="6" y="0.0" width="145.66666666666666" height="190"/>
+                                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-Qo-VlE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="190"/>
                                                         <state key="normal" backgroundImage="model2/face"/>
                                                         <connections>
                                                             <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="5w4-vx-ks4"/>
@@ -175,15 +175,15 @@
                                                 <constraints>
                                                     <constraint firstItem="0Ki-Qo-VlE" firstAttribute="top" secondItem="JGO-Y5-EDy" secondAttribute="top" id="Atv-30-X6A"/>
                                                     <constraint firstAttribute="bottom" secondItem="0Ki-Qo-VlE" secondAttribute="bottom" id="Ydb-Is-Hfy"/>
-                                                    <constraint firstItem="0Ki-Qo-VlE" firstAttribute="leading" secondItem="JGO-Y5-EDy" secondAttribute="leading" constant="6" id="r4n-of-A3f"/>
-                                                    <constraint firstAttribute="trailing" secondItem="0Ki-Qo-VlE" secondAttribute="trailing" constant="6" id="r8N-bx-qGS"/>
+                                                    <constraint firstItem="0Ki-Qo-VlE" firstAttribute="leading" secondItem="JGO-Y5-EDy" secondAttribute="leading" id="r4n-of-A3f"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0Ki-Qo-VlE" secondAttribute="trailing" id="r8N-bx-qGS"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8S-8h-mXJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2d3-XG-Rh3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="190"/>
+                                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2d3-XG-Rh3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="190"/>
                                                         <state key="normal" backgroundImage="model1/face"/>
                                                         <connections>
                                                             <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="3Ae-AU-7J0"/>
@@ -191,7 +191,7 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="2d3-XG-Rh3" secondAttribute="trailing" constant="6" id="8Jc-py-3Q4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2d3-XG-Rh3" secondAttribute="trailing" id="8Jc-py-3Q4"/>
                                                     <constraint firstItem="2d3-XG-Rh3" firstAttribute="top" secondItem="r8S-8h-mXJ" secondAttribute="top" id="CBH-Qf-PN6"/>
                                                     <constraint firstItem="2d3-XG-Rh3" firstAttribute="leading" secondItem="r8S-8h-mXJ" secondAttribute="leading" id="Mes-fS-2ZW"/>
                                                     <constraint firstAttribute="bottom" secondItem="2d3-XG-Rh3" secondAttribute="bottom" id="Ufo-12-ofo"/>
@@ -210,8 +210,8 @@
                                             <constraint firstItem="r8S-8h-mXJ" firstAttribute="width" secondItem="O4H-El-gLo" secondAttribute="width" multiplier="0.4" id="cxI-ck-ylK"/>
                                             <constraint firstItem="JGO-Y5-EDy" firstAttribute="height" secondItem="O4H-El-gLo" secondAttribute="height" id="eoU-7d-11p"/>
                                             <constraint firstItem="r8S-8h-mXJ" firstAttribute="height" secondItem="O4H-El-gLo" secondAttribute="height" id="hBU-Ny-rJT"/>
-                                            <constraint firstItem="CTZ-AD-WbE" firstAttribute="leading" secondItem="JGO-Y5-EDy" secondAttribute="trailing" id="iqq-w9-KVO"/>
-                                            <constraint firstItem="JGO-Y5-EDy" firstAttribute="leading" secondItem="r8S-8h-mXJ" secondAttribute="trailing" id="nyZ-ce-Jb5"/>
+                                            <constraint firstItem="CTZ-AD-WbE" firstAttribute="leading" secondItem="JGO-Y5-EDy" secondAttribute="trailing" constant="12" id="iqq-w9-KVO"/>
+                                            <constraint firstItem="JGO-Y5-EDy" firstAttribute="leading" secondItem="r8S-8h-mXJ" secondAttribute="trailing" constant="12" id="nyZ-ce-Jb5"/>
                                             <constraint firstItem="r8S-8h-mXJ" firstAttribute="bottom" secondItem="YCB-DI-B1f" secondAttribute="bottom" id="uFN-LB-Jjs"/>
                                             <constraint firstItem="r8S-8h-mXJ" firstAttribute="leading" secondItem="YCB-DI-B1f" secondAttribute="leading" id="ysD-qi-lmR"/>
                                             <constraint firstItem="CTZ-AD-WbE" firstAttribute="height" secondItem="O4H-El-gLo" secondAttribute="height" id="zd2-jz-Dd7"/>
