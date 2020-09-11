@@ -150,7 +150,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="157.33333333333334" height="190"/>
                                                         <state key="normal" title="Button" image="model3/face"/>
                                                         <connections>
-                                                            <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="mM6-6j-qhk"/>
+                                                            <action selector="hairSetBt:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="01B-Hz-vT2"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -168,7 +168,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="190"/>
                                                         <state key="normal" backgroundImage="model2/face"/>
                                                         <connections>
-                                                            <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="5w4-vx-ks4"/>
+                                                            <action selector="hairSetBt:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="Ydp-wK-2uF"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -186,7 +186,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="190"/>
                                                         <state key="normal" backgroundImage="model1/face"/>
                                                         <connections>
-                                                            <action selector="setHairButton:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="3Ae-AU-7J0"/>
+                                                            <action selector="hairSetBt:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="ReC-NP-Ied"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -266,7 +266,7 @@
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="similateDwonload:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="bvi-mq-eB9"/>
+                                    <action selector="similateDwonloadBt:" destination="RHe-mm-Xjz" eventType="touchUpInside" id="Fka-Lx-GQh"/>
                                 </connections>
                             </button>
                         </barButtonItem>

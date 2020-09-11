@@ -11,19 +11,25 @@ class SimilationVC: UIViewController {
     
     @IBOutlet weak var userImageview: UIImageView!
     @IBOutlet weak var button: UIButton!
-    
-    var userface:[Int] = [127, 208]
-    var userfaceHairW: Int = 187
-    var model1:[Int] = [147, 198]
-    var model2:[Int] = [155, 216]
-    var model3:[Int] = [177, 213]
+    var hairImgview: UIImageView = UIImageView()
+    var downloadedBar: UILabel = UILabel()
+
+    var userface: [CGFloat] = [127, 208]
+    var model1: [CGFloat] = [147, 198]
+    var model2: [CGFloat] = [155, 216]
+    var model3: [CGFloat] = [177, 213]
+        
+    var hairWRatio: CGFloat = 187/200
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavbarLayout(name: "result")
+        userImageview.addSubview(hairImgview)
+        hairImgview.isHidden = true
+        setDownloadedBar()
         setHairRanking(taglist: [1,2,3])
-        setResultLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,26 +37,68 @@ class SimilationVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    @IBAction func setHairButton(_ sender: UIButton) {
-        setSimilationLayout()
-        removeSubviews(parentView: userImageview)
+    @IBAction func hairSetBt(_ sender: UIButton) {
+        setNavbarLayout(name: "similation")
         removeButtonBorder(taglist: [1,2,3])
         sender.layer.borderColor = UIColor.black.cgColor
         sender.layer.borderWidth = 4.0
         switch sender.tag {
         case 1:
-            setHiar(modelName: "model1", modelLm: model1)
+            setModelHiar(modelName: "model1", modelLm: model1)
         case 2:
-            setHiar(modelName: "model2", modelLm: model2)
+            setModelHiar(modelName: "model2", modelLm: model2)
         case 3:
-            setHiar(modelName: "model3", modelLm: model3)
+            setModelHiar(modelName: "model3", modelLm: model3)
         default:
             break
         }
     }
     
-    @IBAction func similateDwonload(_ sender: Any) {
-        let downloadedBar: UILabel = UILabel()
+    @IBAction func similateDwonloadBt(_ sender: UIButton) {
+        downloadedBar.isHidden = false
+        sender.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now()+2.0) {
+            self.downloadedBar.isHidden = true
+            sender.isEnabled = true
+        }
+    }
+    
+    func setNavbarLayout(name: String) {
+        let button = UIButton()
+        switch name {
+        case "result":
+            hairImgview.isHidden = true
+            self.navigationItem.title = "判定結果"
+            button.setImage(UIImage(named: "close"), for: .normal)
+            button.addTarget(self, action: #selector(SimilationVC.backTopView), for:  UIControl.Event.touchUpInside)
+        case "similation":
+            hairImgview.isHidden = false
+            self.navigationItem.title = "シミュレーション"
+            button.setImage(UIImage(named: "back"), for: .normal)
+            button.addTarget(self, action: #selector(SimilationVC.backResultView), for:  UIControl.Event.touchUpInside)
+        default:
+            break
+        }
+        let backBarButtonItem = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+    
+    @objc func backTopView() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc func backResultView() {
+        removeButtonBorder(taglist: [1,2,3])
+        setNavbarLayout(name: "result")
+    }
+    
+    func setModelHiar(modelName: String, modelLm: [CGFloat]) {
+        let modelImage: UIImage = UIImage(named: "\(modelName)/hair")!
+        hairImgview.image = modelImage
+        hairImgview.frame = CGRect(x: userface[0]-modelLm[0]*hairWRatio, y: userface[1]-modelLm[1]*hairWRatio, width: modelImage.size.width*hairWRatio, height: modelImage.size.height*hairWRatio)
+    }
+    
+    func setDownloadedBar() {
         downloadedBar.frame = CGRect(x: 0, y: userImageview.frame.height-32, width: userImageview.frame.width, height: 32)
         downloadedBar.tag = 4
         downloadedBar.backgroundColor = UIColor(hex: "434343")
@@ -58,24 +106,7 @@ class SimilationVC: UIViewController {
         downloadedBar.textColor = UIColor.white
         downloadedBar.font = downloadedBar.font.withSize(13)
         userImageview.addSubview(downloadedBar)
-        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SimilationVC.removeDownloadedBar), userInfo: nil, repeats: false)
-    }
-    
-    @objc func removeDownloadedBar() {
-        let subviews = userImageview.subviews
-        for subview in subviews {
-            if subview.tag == 4 {
-                subview.removeFromSuperview()
-            }
-        }
-    }
-
-    func setHiar(modelName: String, modelLm: [Int]) {
-        let imgRatio: CGFloat = CGFloat(userfaceHairW) / 200
-        let modelImage: UIImage = UIImage(named: "\(modelName)/hair")!
-        let hairImgview: UIImageView = UIImageView(image: modelImage)
-        hairImgview.frame = CGRect(x: CGFloat(CGFloat(userface[0]) - CGFloat(modelLm[0])*imgRatio), y: CGFloat(CGFloat(userface[1]) - CGFloat(modelLm[1])*imgRatio), width: modelImage.size.width*imgRatio, height: modelImage.size.height*imgRatio)
-        userImageview.addSubview(hairImgview)
+        downloadedBar.isHidden = true
     }
     
     func setHairRanking(taglist: [Int]) {
@@ -101,44 +132,6 @@ class SimilationVC: UIViewController {
             }
             rankingIcon.backgroundColor = UIColor(hex: rankingBgColor)
             button?.addSubview(rankingIcon)
-        }
-    }
-    
-    func setResultLayout() {
-        self.navigationItem.title = "判定結果"
-        let button = UIButton()
-        button.setImage(UIImage(named: "close"), for: .normal)
-        button.addTarget(self, action: #selector(SimilationVC.backTopView), for:  UIControl.Event.touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: button)
-        self.navigationItem.leftBarButtonItem = backBarButtonItem
-    }
-    
-    
-    @objc func backTopView() {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-
-    func setSimilationLayout() {
-        self.navigationItem.title = "シミュレーション"
-        let button = UIButton()
-        button.setImage(UIImage(named: "back"), for: .normal)
-        button.addTarget(self, action: #selector(SimilationVC.backResultView), for:  UIControl.Event.touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: button)
-        self.navigationItem.leftBarButtonItem = backBarButtonItem
-    }
-    
-    
-    @objc func backResultView() {
-        removeSubviews(parentView: userImageview)
-        removeButtonBorder(taglist: [1,2,3])
-        setResultLayout()
-    }
-    
-    
-    func removeSubviews(parentView: UIImageView){
-        let subviews = parentView.subviews
-        for subview in subviews {
-            subview.removeFromSuperview()
         }
     }
     
