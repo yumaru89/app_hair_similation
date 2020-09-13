@@ -9,8 +9,9 @@ import UIKit
 
 class SimilationVC: UIViewController {
     
+    @IBOutlet weak var similateView: UIView!
     @IBOutlet weak var userImageview: UIImageView!
-    @IBOutlet weak var button: UIButton!
+    var hairImgScrollview: UIScrollView = UIScrollView()
     var hairImgview: UIImageView = UIImageView()
     var downloadedBar: UILabel = UILabel()
 
@@ -26,8 +27,7 @@ class SimilationVC: UIViewController {
         super.viewDidLoad()
         
         setNavbarLayout(name: "result")
-        userImageview.addSubview(hairImgview)
-        hairImgview.isHidden = true
+        setModelHairView()
         setDownloadedBar()
         setHairRanking(taglist: [1,2,3])
     }
@@ -92,12 +92,29 @@ class SimilationVC: UIViewController {
         setNavbarLayout(name: "result")
     }
     
-    func setModelHiar(modelName: String, modelLm: [CGFloat]) {
-        let modelImage: UIImage = UIImage(named: "\(modelName)/hair")!
-        hairImgview.image = modelImage
-        hairImgview.frame = CGRect(x: userface[0]-modelLm[0]*hairWRatio, y: userface[1]-modelLm[1]*hairWRatio, width: modelImage.size.width*hairWRatio, height: modelImage.size.height*hairWRatio)
+    func setModelHairView() {
+        hairImgScrollview.frame = CGRect(x:0, y:0, width: userImageview.frame.width, height: userImageview.frame.height)
+        hairImgScrollview.maximumZoomScale = 2.0
+        hairImgScrollview.minimumZoomScale = 0.5
+        hairImgScrollview.bounces = false
+//        hairImgScrollview.contentSize = CGSize(width: 1000, height: 1000)
+//
+//        let midOffsetX = (1000 - hairImgScrollview.frame.size.width)/2
+//        let midOffsetY = (1000 - hairImgScrollview.frame.size.height)/2
+//        hairImgScrollview.contentOffset = CGPoint(x: midOffsetX, y: midOffsetY)
+        hairImgScrollview.delegate = self
+        similateView.addSubview(hairImgScrollview)
+        hairImgScrollview.addSubview(hairImgview)
+        hairImgview.isHidden = true
     }
+
     
+    func setModelHiar(modelName: String, modelLm: [CGFloat]) {
+        let hairImg: UIImage = UIImage(named: "\(modelName)/hair")!
+        hairImgview.image = hairImg
+        hairImgview.frame = CGRect(x: userface[0]-modelLm[0]*hairWRatio, y: userface[1]-modelLm[1]*hairWRatio, width: hairImg.size.width*hairWRatio, height: hairImg.size.height*hairWRatio)
+    }
+
     func setDownloadedBar() {
         downloadedBar.frame = CGRect(x: 0, y: userImageview.frame.height-32, width: userImageview.frame.width, height: 32)
         downloadedBar.tag = 4
@@ -140,6 +157,12 @@ class SimilationVC: UIViewController {
             let button = self.view.viewWithTag(tag) as? UIButton
             button?.layer.borderWidth = 0.0
         }
+    }
+}
+
+extension SimilationVC: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return hairImgview
     }
 }
 

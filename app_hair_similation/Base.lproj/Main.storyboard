@@ -233,20 +233,32 @@
                                     <constraint firstItem="pGZ-nG-vEQ" firstAttribute="top" secondItem="KlW-lH-7KP" secondAttribute="top" constant="18" id="zao-Ar-VaT"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="re_userface" translatesAutoresizingMaskIntoConstraints="NO" id="EKm-3y-A4d">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HbR-ne-gVu">
                                 <rect key="frame" x="0.0" y="88" width="414" height="558"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="re_userface" translatesAutoresizingMaskIntoConstraints="NO" id="EKm-3y-A4d">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="EKm-3y-A4d" firstAttribute="bottom" secondItem="HbR-ne-gVu" secondAttribute="bottom" id="Jje-4g-oa3"/>
+                                    <constraint firstItem="EKm-3y-A4d" firstAttribute="leading" secondItem="HbR-ne-gVu" secondAttribute="leading" id="dw3-5k-r6C"/>
+                                    <constraint firstItem="EKm-3y-A4d" firstAttribute="top" secondItem="HbR-ne-gVu" secondAttribute="top" id="iYe-cQ-Kop"/>
+                                    <constraint firstAttribute="trailing" secondItem="EKm-3y-A4d" secondAttribute="trailing" id="pgp-xb-2hH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ci5-89-vgE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="EKm-3y-A4d" firstAttribute="leading" secondItem="ci5-89-vgE" secondAttribute="leading" id="C1Q-vO-ne8"/>
-                            <constraint firstItem="KlW-lH-7KP" firstAttribute="top" secondItem="EKm-3y-A4d" secondAttribute="bottom" id="Foh-hK-SKS"/>
+                            <constraint firstItem="HbR-ne-gVu" firstAttribute="top" secondItem="ci5-89-vgE" secondAttribute="top" id="Clk-lB-emg"/>
                             <constraint firstItem="KlW-lH-7KP" firstAttribute="trailing" secondItem="ci5-89-vgE" secondAttribute="trailing" id="PzA-8c-fep"/>
                             <constraint firstAttribute="bottom" secondItem="KlW-lH-7KP" secondAttribute="bottom" id="ReC-xu-PuY"/>
-                            <constraint firstItem="EKm-3y-A4d" firstAttribute="top" secondItem="ci5-89-vgE" secondAttribute="top" id="fQO-GG-Zfb"/>
+                            <constraint firstItem="KlW-lH-7KP" firstAttribute="top" secondItem="HbR-ne-gVu" secondAttribute="bottom" id="Tvq-o2-zU9"/>
+                            <constraint firstItem="HbR-ne-gVu" firstAttribute="leading" secondItem="ci5-89-vgE" secondAttribute="leading" id="jlV-GM-gBi"/>
+                            <constraint firstItem="ci5-89-vgE" firstAttribute="trailing" secondItem="HbR-ne-gVu" secondAttribute="trailing" id="kL2-YL-0Zs"/>
                             <constraint firstItem="KlW-lH-7KP" firstAttribute="leading" secondItem="ci5-89-vgE" secondAttribute="leading" id="p3L-ol-NpQ"/>
-                            <constraint firstItem="EKm-3y-A4d" firstAttribute="trailing" secondItem="ci5-89-vgE" secondAttribute="trailing" id="vD7-SS-hhZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="判定結果" id="7yu-ps-EOK">
@@ -273,6 +285,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="similateView" destination="HbR-ne-gVu" id="a4e-KB-mjz"/>
                         <outlet property="userImageview" destination="EKm-3y-A4d" id="Edt-om-TZg"/>
                     </connections>
                 </viewController>
