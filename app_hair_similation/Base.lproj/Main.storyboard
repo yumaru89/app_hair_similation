@@ -285,6 +285,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="modelChangeView" destination="KlW-lH-7KP" id="oId-8H-twJ"/>
                         <outlet property="similateView" destination="HbR-ne-gVu" id="a4e-KB-mjz"/>
                         <outlet property="userImageview" destination="EKm-3y-A4d" id="Edt-om-TZg"/>
                     </connections>

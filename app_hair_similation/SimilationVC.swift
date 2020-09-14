@@ -11,8 +11,16 @@ class SimilationVC: UIViewController {
     
     @IBOutlet weak var similateView: UIView!
     @IBOutlet weak var userImageview: UIImageView!
+    @IBOutlet weak var modelChangeView: UIView!
+    
+    
     var hairImgScrollview: UIScrollView = UIScrollView()
     var hairImgview: UIImageView = UIImageView()
+    var colorChangerView: UIView = UIView()
+    var colorListScrollview: UIScrollView = UIScrollView()
+    var colorView: UIView = UIView()
+    var colorCheckImgview: UIImageView = UIImageView()
+    var isFold: Bool = false
     var downloadedBar: UILabel = UILabel()
 
     var userface: [CGFloat] = [127, 208]
@@ -26,8 +34,10 @@ class SimilationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNavbarLayout(name: "result")
+        defaultLyaout()
+        switchSimilateView(name: "result")
         setModelHairView()
+        setHairColorChanger()
         setDownloadedBar()
         setHairRanking(taglist: [1,2,3])
     }
@@ -38,7 +48,7 @@ class SimilationVC: UIViewController {
     }
     
     @IBAction func hairSetBt(_ sender: UIButton) {
-        setNavbarLayout(name: "similation")
+        switchSimilateView(name: "similation")
         removeButtonBorder(taglist: [1,2,3])
         sender.layer.borderColor = UIColor.black.cgColor
         sender.layer.borderWidth = 4.0
@@ -63,19 +73,28 @@ class SimilationVC: UIViewController {
         }
     }
     
-    func setNavbarLayout(name: String) {
+    func defaultLyaout() {
+        modelChangeView.layer.shadowColor = UIColor.black.cgColor
+        modelChangeView.layer.shadowOpacity = 0.25
+        modelChangeView.layer.shadowRadius = 4
+        modelChangeView.layer.shadowOffset = CGSize(width: 0, height: -2)
+    }
+    
+    func switchSimilateView(name: String) {
         let button = UIButton()
         switch name {
         case "result":
             hairImgview.isHidden = true
+            colorChangerView.isHidden = true
             self.navigationItem.title = "判定結果"
             button.setImage(UIImage(named: "close"), for: .normal)
-            button.addTarget(self, action: #selector(SimilationVC.backTopView), for:  UIControl.Event.touchUpInside)
+            button.addTarget(self, action: #selector(SimilationVC.backTopView), for: .touchUpInside)
         case "similation":
             hairImgview.isHidden = false
+            colorChangerView.isHidden = false
             self.navigationItem.title = "シミュレーション"
             button.setImage(UIImage(named: "back"), for: .normal)
-            button.addTarget(self, action: #selector(SimilationVC.backResultView), for:  UIControl.Event.touchUpInside)
+            button.addTarget(self, action: #selector(SimilationVC.backResultView), for: .touchUpInside)
         default:
             break
         }
@@ -89,7 +108,7 @@ class SimilationVC: UIViewController {
     
     @objc func backResultView() {
         removeButtonBorder(taglist: [1,2,3])
-        setNavbarLayout(name: "result")
+        switchSimilateView(name: "result")
     }
     
     func setModelHairView() {
@@ -97,9 +116,11 @@ class SimilationVC: UIViewController {
         hairImgScrollview.maximumZoomScale = 2.0
         hairImgScrollview.minimumZoomScale = 0.5
         hairImgScrollview.bounces = false
-        hairImgScrollview.contentSize = CGSize(width: 1000, height: 1000)
-        let midOffsetX = (1000 - hairImgScrollview.frame.width)/2
-        let midOffsetY = (1000 - hairImgScrollview.frame.height)/2
+        hairImgScrollview.showsHorizontalScrollIndicator = false
+        hairImgScrollview.showsVerticalScrollIndicator = false
+        hairImgScrollview.contentSize = CGSize(width: 800, height: 800)
+        let midOffsetX = (800 - hairImgScrollview.frame.width)/2
+        let midOffsetY = (800 - hairImgScrollview.frame.height)/2
         hairImgScrollview.contentInset = .init(top: midOffsetY,
                                         left: midOffsetX,
                                         bottom: midOffsetY,
@@ -116,7 +137,86 @@ class SimilationVC: UIViewController {
         hairImgview.image = hairImg
         hairImgview.frame = CGRect(x: userface[0]-modelLm[0]*hairWRatio, y: userface[1]-modelLm[1]*hairWRatio, width: hairImg.size.width*hairWRatio, height: hairImg.size.height*hairWRatio)
     }
+    
+    func setHairColorChanger() {
+        let colorList: [String] = ["#6D4F4D", "#160803", "#321F10", "#3B291B", "#5E3A37", "#5A442F", "#706B67", "#BDBDBD"]
 
+        colorChangerView.frame = CGRect(x: 0, y: similateView.frame.height-88, width: similateView.frame.width, height: 88)
+        similateView.addSubview(colorChangerView)
+        
+        let titleLabel: UILabel = UILabel()
+        titleLabel.frame = CGRect(x: 12, y: 0, width: 44, height: 24)
+        titleLabel.text = "カラー"
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        colorChangerView.addSubview(titleLabel)
+        
+        let closeBt: switchColorBt = switchColorBt()
+        closeBt.frame = CGRect(x: titleLabel.frame.maxX+10, y: 0, width: 60, height: 24)
+        closeBt.setTitle("< 閉じる", for: .normal)
+        closeBt.setTitleColor(UIColor.black, for: .normal)
+        closeBt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        closeBt.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+
+
+        closeBt.colorList = colorList
+        closeBt.color = "#6D4F4D"
+      
+        closeBt.addTarget(self, action: #selector(SimilationVC.switchColorView), for: .touchUpInside)
+        colorChangerView.addSubview(closeBt)
+        
+        setColorListView(colorList: colorList, senderBt: closeBt)
+    }
+    
+    @objc func switchColorView(_ sender: switchColorBt) {
+        if isFold {
+            setColorListView(colorList: sender.colorList, senderBt: sender)
+            isFold = false
+        } else {
+            setFolodColorView(color: sender.color, senderBt: sender)
+            isFold = true
+        }
+    }
+    
+    func setColorListView(colorList: [String], senderBt: switchColorBt) {
+        colorListScrollview.isHidden = false
+        colorView.isHidden = true
+        senderBt.setTitle("< 閉じる", for: .normal)
+        colorListScrollview.frame = CGRect(x: 12, y: (colorChangerView.frame.height-48)-10, width: similateView.frame.width, height: 48)
+        colorListScrollview.contentSize = CGSize(width: (48+12)*colorList.count, height: 48)
+        colorListScrollview.showsHorizontalScrollIndicator = false
+        colorListScrollview.showsVerticalScrollIndicator = false
+        colorChangerView.addSubview(colorListScrollview)
+        
+        for (i, color) in colorList.enumerated() {
+            let changeColorBt: UIButton = UIButton()
+            changeColorBt.backgroundColor = UIColor(hex: color)
+            changeColorBt.frame = CGRect(x: CGFloat((48+12)*i), y: 0, width: 48, height: 48)
+            changeColorBt.layer.cornerRadius = changeColorBt.frame.width/2
+            changeColorBt.addTarget(self, action: #selector(SimilationVC.checkColorBt), for: .touchUpInside)
+            colorListScrollview.addSubview(changeColorBt)
+        }
+    }
+    
+    func setFolodColorView(color: String, senderBt: switchColorBt) {
+        colorListScrollview.isHidden = true
+        colorView.isHidden = false
+        senderBt.setTitle(">", for: .normal)
+        colorView.backgroundColor = UIColor(hex: color)
+        colorView.frame = CGRect(x: 12, y: (colorChangerView.frame.height-48)-10, width: 48, height: 48)
+        colorView.layer.cornerRadius = colorView.frame.width/2
+        colorChangerView.addSubview(colorView)
+    }
+    
+    @objc func checkColorBt(_ sender: UIButton) {
+        for subview in sender.subviews {
+            subview.removeFromSuperview()
+        }
+        colorCheckImgview.image = UIImage(named: "colorCheck")
+        colorCheckImgview.frame = CGRect(x: 12, y: 16, width: sender.frame.width-24, height: sender.frame.height-32)
+        sender.addSubview(colorCheckImgview)
+    }
+    
     func setDownloadedBar() {
         downloadedBar.frame = CGRect(x: 0, y: userImageview.frame.height-32, width: userImageview.frame.width, height: 32)
         downloadedBar.tag = 4
@@ -170,10 +270,29 @@ extension SimilationVC: UIScrollViewDelegate {
 
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
+        var hex: String = hex
+        if hex.contains("#") {
+            hex = hex.replace("#", "")
+        }
         let v = Int("000000" + hex, radix: 16) ?? 0
         let r = CGFloat(v / Int(powf(256, 2)) % 256) / 255
         let g = CGFloat(v / Int(powf(256, 1)) % 256) / 255
         let b = CGFloat(v / Int(powf(256, 0)) % 256) / 255
         self.init(red: r, green: g, blue: b, alpha: min(max(alpha, 0), 1))
     }
+}
+
+extension String {
+    func replace(_ from: String,_ to: String) -> String {
+        var replacedString = self
+        replacedString = replacedString.replacingOccurrences(of: from, with: to)
+
+        return replacedString
+    }
+}
+
+
+class switchColorBt:UIButton {
+    var colorList: [String] = []
+    var color: String = ""
 }
