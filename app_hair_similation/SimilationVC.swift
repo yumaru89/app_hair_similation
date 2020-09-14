@@ -97,11 +97,13 @@ class SimilationVC: UIViewController {
         hairImgScrollview.maximumZoomScale = 2.0
         hairImgScrollview.minimumZoomScale = 0.5
         hairImgScrollview.bounces = false
-//        hairImgScrollview.contentSize = CGSize(width: 1000, height: 1000)
-//
-//        let midOffsetX = (1000 - hairImgScrollview.frame.size.width)/2
-//        let midOffsetY = (1000 - hairImgScrollview.frame.size.height)/2
-//        hairImgScrollview.contentOffset = CGPoint(x: midOffsetX, y: midOffsetY)
+        hairImgScrollview.contentSize = CGSize(width: 1000, height: 1000)
+        let midOffsetX = (1000 - hairImgScrollview.frame.width)/2
+        let midOffsetY = (1000 - hairImgScrollview.frame.height)/2
+        hairImgScrollview.contentInset = .init(top: midOffsetY,
+                                        left: midOffsetX,
+                                        bottom: midOffsetY,
+                                        right: midOffsetX)
         hairImgScrollview.delegate = self
         similateView.addSubview(hairImgScrollview)
         hairImgScrollview.addSubview(hairImgview)
